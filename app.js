@@ -1,21 +1,44 @@
-const http = require('http');
-const fs = require('fs');
+const express = require("express");
+const bodyParser = require("body-parser");
+const http = require("http");
+const socketIo = require("socket.io");
+const path = require("path");
 
-const hostname = '0.0.0.0';
+const app = express();
 const port = 3000;
 
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/html'); // Ændret til HTML
-  fs.readFile('./public/index.html', (error, data) => { // Læs indholdet af en HTML-fil (index.html)
-    if (error) {
-      res.end('<h1>Fejl ved indlæsning af HTML-fil</h1>'); // Håndter fejl i læsningen
-    } else {
-      res.end(data); // Send indholdet af HTML-filen som svar
-    }
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+const server = http.createServer(app); // Opret en HTTP-server
+const io = socketIo(server); // Konfigurér Socket.IO
+
+const host = "0.0.0.0"; // Lyt på alle tilgængelige IP-adresser
+
+app.use(express.static(path.join(__dirname, "../client")));
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/home.html"));
+});
+
+app.get("/global.css", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/global.css"));
+});
+
+app.get("/home.js", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/home.js"));
+});
+
+server.listen(port, host, () => {
+  console.log(`Express server running at http://${host}:${port}/`);
+});
+
+io.on("connection", (socket) => {
+  console.log("Someone connected");
+  socket.on("chat message", (msg) => {
+    console.log("Message: " + msg);
+    io.emit("chat message", msg);
   });
 });
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-});
+
