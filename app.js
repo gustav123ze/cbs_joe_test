@@ -1,9 +1,3 @@
-const express = require('express');
-const app = express();
-
-app.use(express.static('public'));
-
-
 const http = require('http');
 
 const hostname = '0.0.0.0';
