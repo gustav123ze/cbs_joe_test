@@ -15,18 +15,18 @@ const io = socketIo(server); // Konfigurér Socket.IO
 
 const host = "0.0.0.0"; // Lyt på alle tilgængelige IP-adresser
 
-app.use(express.static(path.join(__dirname, "../client")));
+app.use(express.static(path.join(__dirname, "./client")));
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/home.html"));
+  res.sendFile(path.join(__dirname, "./client/home.html"));
 });
 
 app.get("/global.css", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/global.css"));
+  res.sendFile(path.join(__dirname, "./client/global.css"));
 });
 
 app.get("/home.js", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/home.js"));
+  res.sendFile(path.join(__dirname, "./client/home.js"));
 });
 
 server.listen(port, host, () => {
