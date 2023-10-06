@@ -4,7 +4,7 @@ const port = 3000; // Du kan ændre porten efter behov
 
 
 app.get('/', (req, res) => {
-  res.send('Hej det virker test');
+  res.send('Dette er den rigtige');
 }); 
 
 app.listen(port, '0.0.0.0', () => {
