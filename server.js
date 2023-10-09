@@ -4,18 +4,16 @@ const http = require('http');
 const app = express();
 const server = http.createServer(app);
 
-// Define API endpoint to get users
 app.get('/users', (req, res) => {
   const users = [
-    { id: 1, name: 'John' },
-    { id: 2, name: 'Jane' }
+    { id: 1, name: 'Gustav' },
+    { id: 2, name: 'Hans' }
   ];
-  // Sæt statuskoden til 200 (OK) og send brugerdata som JSON
+  
   res.status(200).json(users);
 });
 
 app.get('/', (req, res) => {
-  // Sæt statuskoden til 200 (OK) og send en simpel besked som svar
   res.status(200).send('Det virker');
 });
 
