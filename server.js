@@ -1,22 +1,17 @@
-const http = require('http');
+const express = require('express');
+const app = express();
 
 const hostname = '0.0.0.0';
 const port = 3000;
 
-const server = http.createServer((req, res) => {
-    if (req.url === '/testapi' && req.method === 'GET') {
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'text/plain');
-        res.end('test det virker');
-    } else {
-        res.statusCode = 404;
-        res.end();
-    }
+app.get('/testapi', (req, res) => {
+    res.status(200).send('test det virker');
 });
 
-server.listen(port, hostname, () => {
+app.use((req, res) => {
+    res.status(404).end();
+});
+
+app.listen(port, hostname, () => {
     console.log(`Server running at http://${hostname}:${port}/`);
 });
-
-
-
