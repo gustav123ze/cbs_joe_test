@@ -10,18 +10,14 @@ app.get('/api/users', (req, res) => {
     { id: 1, name: 'John' },
     { id: 2, name: 'Jane' }
   ];
-  res.json(users);
+  // Sæt statuskoden til 200 (OK) og send brugerdata som JSON
+  res.status(200).json(users);
 });
-
 
 app.get('/', (req, res) => {
-
-  res.send('Hello World!');
-
+  // Sæt statuskoden til 200 (OK) og send en simpel besked som svar
+  res.status(200).send('Hello World!');
 });
-
-
-
 
 const hostname = '0.0.0.0';
 const port = 3000;
