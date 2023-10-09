@@ -16,7 +16,7 @@ app.get('/api/users', (req, res) => {
 
 app.get('/', (req, res) => {
   // Sæt statuskoden til 200 (OK) og send en simpel besked som svar
-  res.status(200).send('Hello World!');
+  res.status(200).send('Det virker');
 });
 
 const hostname = '0.0.0.0';
