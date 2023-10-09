@@ -13,6 +13,16 @@ app.get('/api/users', (req, res) => {
   res.json(users);
 });
 
+
+app.get('/', (req, res) => {
+
+  res.send('Hello World!');
+
+});
+
+
+
+
 const hostname = '0.0.0.0';
 const port = 3000;
 
